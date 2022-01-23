@@ -19,6 +19,10 @@ namespace BingOnline.Dtos.Perfil
 
             //Participante
             CreateMap<Participante, ParticipanteDto>();
+
+            CreateMap<Cartela, CartelaDto>();
+
+            CreateMap<Numero, NumeroDto>();
         }
     }
 }

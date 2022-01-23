@@ -22,7 +22,8 @@ namespace BingOnline.Controllers
         public async Task<IActionResult> ListarTodos()
         {
             var usuarios = await _usuarioRepositorio.ObterTodos();
-            return Ok(usuarios);
+            var usuariosDto = _mapper.Map<List<UsuarioDto>>(usuarios);
+            return Ok(usuariosDto);
         }
 
         [HttpGet("{id}", Name = "UsuarioDetails")]
@@ -31,7 +32,9 @@ namespace BingOnline.Controllers
             Usuario usuario = await _usuarioRepositorio.Obter(id);
             if (usuario == null)
                 return NotFound();
-            return Ok(usuario);
+
+            var usuarioDto = _mapper.Map<UsuarioDto>(usuario);
+            return Ok(usuarioDto);
         }
 
         [HttpPost]
@@ -42,12 +45,11 @@ namespace BingOnline.Controllers
                 if(!(await _usuarioRepositorio.ObterPorNome(usuario.Nome) is null))
                     return StatusCode(409, "Já existe um usuário com este nome");
 
-
                 Usuario newUsuario = _mapper.Map<Usuario>(usuario);
                 await _usuarioRepositorio.Adicionar(newUsuario);
 
                 var newUsuarioDTO = _mapper.Map<UsuarioDto>(newUsuario);
-                return CreatedAtRoute("Details", new { Id = newUsuario.Id }, newUsuario);
+                return CreatedAtRoute("UsuarioDetails", new { Id = newUsuario.Id }, newUsuarioDTO);
             }
             catch (Exception ex)
             {

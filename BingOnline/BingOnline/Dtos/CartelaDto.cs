@@ -2,6 +2,6 @@
 {
     public class CartelaDto
     {
-        public List<NumeroDto> Numeros { get; set; } = null;
+        public IList<NumeroDto> Numeros { get; set; } = null;
     }
 }

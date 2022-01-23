@@ -2,7 +2,7 @@
 {
     public class Participante
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; } = Guid.NewGuid();
         public Usuario Usuario { get; set; }
         public Cartela Cartela { get; set; }
     }

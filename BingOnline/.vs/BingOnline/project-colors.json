@@ -10,7 +10,12 @@
       "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
       "DisplayName": "Arquivos Diversos",
       "ColorIndex": -1
+    },
+    "6bf15d67-61ad-40a8-aaa9-ddcaa8a80548": {
+      "ProjectGuid": "6bf15d67-61ad-40a8-aaa9-ddcaa8a80548",
+      "DisplayName": "ConsoleApp1",
+      "ColorIndex": 1
     }
   },
-  "NextColorIndex": 1
+  "NextColorIndex": 2
 }

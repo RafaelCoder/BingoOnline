@@ -22,7 +22,8 @@ namespace BingOnline.Controllers
         public async Task<IActionResult> Listar()
         {
             var partidas = await _partidaRepositorio.ObterTodos();
-            return Ok(partidas);
+            var partidasDto = _mapper.Map<List<PartidaDto>>(partidas);
+            return Ok(partidasDto);
         }
 
         [HttpGet("{id}", Name = "PartidaDetails")]

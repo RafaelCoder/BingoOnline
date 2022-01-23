@@ -50,13 +50,16 @@ namespace BingOnline.Controllers
 
             var participantes = partida.Participantes;
 
-            var participantesDTO = _mapper.Map<List<ParticipanteDto>>(participantes);
+            IList<ParticipanteDto> participantesDTO = _mapper.Map<IList<ParticipanteDto>>(participantes);
+            /* IList<ParticipanteDto> participantesDTO = new List<ParticipanteDto>();
+            foreach (Participante p in participantes)
+                participantesDTO.Add(_mapper.Map<ParticipanteDto>(p)); */
 
-            return Ok(participantes);
+            return Ok(participantesDTO);
         }
 
         [HttpGet("{id}", Name = "ParticipanteDetails")]
-        public async Task<IActionResult> ParticipanteDetails(Guid idPartida, int id) {
+        public async Task<IActionResult> ParticipanteDetails(Guid idPartida, Guid id) {
             Partida partida = await _partidaRepositorio.Obter(idPartida);
             if (partida == null)
                 return NotFound();
@@ -91,7 +94,6 @@ namespace BingOnline.Controllers
                 var participantes = partida.Participantes;
 
                 Participante newParticipante = new Participante();
-                newParticipante.Id = participantes.Count +1; // mudar pra Guid  teste
                 newParticipante.Usuario = usuario;
                 newParticipante.Cartela = new Cartela();
                 newParticipante.Cartela.GerarNumeros();
@@ -101,7 +103,7 @@ namespace BingOnline.Controllers
                 await _partidaRepositorio.Atualizar(partida);
 
                 var partidaDTO = _mapper.Map<PartidaDto>(partida);
-                return CreatedAtRoute("PartidaDetails", new { Id = partidaDTO.Id }, partidaDTO);
+                return CreatedAtRoute("ParticipanteDetails", new { Id = partidaDTO.Id }, partidaDTO);
             }
             catch (Exception ex)
             {
