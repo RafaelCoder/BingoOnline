@@ -93,6 +93,10 @@ namespace BingOnline.Controllers
 
                 var participantes = partida.Participantes;
 
+                //futuramente validar se deve ser permitido mais de uma cartela por usuário, mas por enquanto bloqueia pra ter uma só.
+                if(participantes.Where(p => p.IdUsuario == usuario.Id).Any())
+                    return StatusCode(409, "Este usuário já possui cartela");
+
                 Participante newParticipante = new Participante();
                 newParticipante.IdUsuario = usuario.Id;
                 newParticipante.Cartela = new Cartela();

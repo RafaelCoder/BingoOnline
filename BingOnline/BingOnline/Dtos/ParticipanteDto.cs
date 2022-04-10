@@ -3,7 +3,7 @@
     public class ParticipanteDto
     {
         public Guid Id { get; set; }
-        public UsuarioDto Usuario { get; set; } // Criar um usuário especifico para exibição  UsuarioExibicaoDto
+        public Guid IdUsuario { get; set; }
         public CartelaDto Cartela { get; set; }
     }
 }
