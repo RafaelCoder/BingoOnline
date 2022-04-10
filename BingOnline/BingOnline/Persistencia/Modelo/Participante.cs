@@ -3,7 +3,7 @@
     public class Participante
     {
         public Guid Id { get; set; } = Guid.NewGuid();
-        public Usuario Usuario { get; set; }
+        public Guid IdUsuario { get; set; }
         public Cartela Cartela { get; set; }
     }
 }

@@ -94,7 +94,7 @@ namespace BingOnline.Controllers
                 var participantes = partida.Participantes;
 
                 Participante newParticipante = new Participante();
-                newParticipante.Usuario = usuario;
+                newParticipante.IdUsuario = usuario.Id;
                 newParticipante.Cartela = new Cartela();
                 newParticipante.Cartela.GerarNumeros();
                 newParticipante.Cartela.OrdenarNumeros();
@@ -103,7 +103,8 @@ namespace BingOnline.Controllers
                 await _partidaRepositorio.Atualizar(partida);
 
                 var partidaDTO = _mapper.Map<PartidaDto>(partida);
-                return CreatedAtRoute("ParticipanteDetails", new { Id = partidaDTO.Id }, partidaDTO);
+                return CreatedAtAction(nameof(ParticipanteDetails), new { idPartida = partidaDTO.Id, Id = newParticipante.Id }, newParticipante);
+                //return CreatedAtRoute("ParticipanteDetails", new { idPartida = partidaDTO.Id, Id = newParticipante.Id });
             }
             catch (Exception ex)
             {
